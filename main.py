@@ -7,7 +7,7 @@ import time
 from apprise import Apprise
 
 # File to persist notified products
-PERSISTENCE_FILE = 'notified_products.pkl'
+PERSISTENCE_FILE = '/config/notified_products.pkl'
 
 # Function to fetch data from the API
 def fetch_data(api_url):
@@ -35,7 +35,7 @@ def send_notification(name, price, days_left):
             apobj.add(url.strip())
     
     title = "" 
-    body = f"Rum ist die naechsten {days_left} bei {name} fuer {price} im Angebot!" 
+    body = f"Rum ist die nächsten {days_left} Tage bei {name} für {price}€ im Angebot!" 
 
     apobj.notify(
         body=body,
@@ -66,7 +66,7 @@ def main(check_interval=3600):
         current_sales = set()
         
         for item in data:
-            if item['status'] == 'im angebot':
+            if item['status'] == 'im angebot' and item['name'] in ["Aldi Süd", "Hit", "Kaufland", "Lidl", "Metro", "Netto Marken-Discount", "Norma", "Penny", "Rewe", "Tegut", "V-Markt"]:
                 price, days_left = parse_raw_data(item['raw'])
                 product_identifier = (item['name'], price)
                 current_sales.add(product_identifier)
