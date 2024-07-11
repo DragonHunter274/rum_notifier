@@ -66,7 +66,7 @@ def main(check_interval=3600):
         current_sales = set()
         
         for item in data:
-            if item['status'] == 'im angebot' and item['name'] in ["Aldi Süd", "Hit", "Kaufland", "Lidl", "Metro", "Netto Marken-Discount", "Norma", "Penny", "Rewe", "Tegut", "V-Markt"]:
+            if item['status'] == 'im angebot' and item['name'] in ["Aldi Süd", "Hit", "Kaufland", "Lidl", "Metro", "Netto Marken-Discount", "Norma", "Penny", "Rewe", "Tegut", "V-Markt", "trinkgut"]:
                 price, days_left = parse_raw_data(item['raw'])
                 product_identifier = (item['name'], price)
                 current_sales.add(product_identifier)
